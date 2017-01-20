@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+	<head>
+		<title>Notas Fáceis</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body ng-controller="CadernoController as cadernoCtrl">
+		<div class="container">
+			<h1>Notas Fáceis</h1>
+			<div class="row">
+				<div class="col-md-2">
+					<h2>Cadernos</h2>
+					<input type="text" class="form-control" ng-model="nomeCaderno" placeholder="Nome caderno"><button class="btn btn-default" ng-click="cadernoCtrl.novoCaderno(nomeCaderno);nomeCaderno=''"><span class="glyphicon glyphicon-plus"></span></button>
+					<ul class="list-group" style="margin-top: 5px;" ng-controller="TabController as tabCtrl">
+						<li class="list-group-item" ng-class="{ active:tabCtrl.isSet($index) }"
+						 ng-click="tabCtrl.setTab($index); cadernoCtrl.selectCaderno(caderno);" ng-repeat="caderno in cadernoCtrl.cadernos">{{ caderno.nome }}</li>
+					</ul>
+				</div>
+				<div class="col-md-10">
+					<h2>Notas</h2>
+					<div class="row">
+						<div class="col-md-3">
+							<button class="btn btn-default" ng-click="cadernoCtrl.novaNota()"><span class="glyphicon glyphicon-plus"></span> Nova Nota</button>
+							<ul class="list-group" style="margin-top: 5px;" ng-controller='TabController as tabCtrl'>
+								<li class="list-group-item" ng-class="{ active:tabCtrl.isSet($index) }"
+								 ng-click="tabCtrl.setTab($index); cadernoCtrl.selectNota(nota);" ng-repeat="nota in cadernoCtrl.caderno.notas">{{nota.titulo}}</li>
+							</ul>
+						</div>
+						<div class="col-md-9">
+							<div class="row">
+								<div class="col-md-12">
+									<form>
+										<div class="form-group">
+											<input type="text" class="form-control" id="title" ng-model='cadernoCtrl.nota.titulo' placeholder="Título">
+										</div>
+										<div class="form-group">
+											<textarea class="form-control" id="conteudo" ng-model='cadernoCtrl.nota.conteudo' placeholder="Conteúdo" rows=20></textarea>
+										</div>
+										<div class="form-group">
+											<button class="btn btn-primary" ng-click="cadernoCtrl.salvarNota()">Salvar</button>
+											<button class="btn btn-danger" ng-click="cadernoCtrl.apagarNota()">Apagar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.6.1/angular-resource.min.js"></script>
+
+		<script src="/javascripts/app.js"></script>
+		<script src="/javascripts/services.js"></script>
+		<script src="/javascripts/controllers.js"></script>
+	</body>
+</html>
