@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/notasfaceis', function(err) {
+mongoose.connect('mongodb://heroku_zmft0k3z:n0ivenu7j8017obfv9vhn73e1f@ds017899.mlab.com:17899/notasfaceis', function(err) {
 	if(err) console.log('connection error', err);
 	else console.log('connection successfull');
 });
